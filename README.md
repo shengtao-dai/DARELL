@@ -5,12 +5,18 @@ An R package for a distributionally adaptive regression estimator under Local Li
 ## Installation
 
 ```r
-# Install devtools if needed
-# install.packages("devtools")
+# Option 1: pak (recommended)
+install.packages("pak")
+pak::pak("shengtao-dai/DARELL")
 
-devtools::install_local("DARELL", upgrade = "never")
-# or build first:
-# devtools::build("DARELL"); devtools::install("DARELL_0.1.0.tar.gz")
+# Option 2: remotes
+install.packages("remotes")
+remotes::install_github("shengtao-dai/DARELL")
+
+# Option 3: devtools
+install.packages("devtools")
+devtools::install_github("shengtao-dai/DARELL")
+
 ```
 
 ## Usage
