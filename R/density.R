@@ -1,7 +1,7 @@
 # Kernel density and conditional density utilities
 
 #' Kernel density estimate of f_X(x)
-#' @export
+
 fx_den <- function(X, x, h) {
   if (is.vector(X)) X <- matrix(X, ncol = 1)
   d <- ncol(X)
@@ -11,7 +11,7 @@ fx_den <- function(X, x, h) {
 }
 
 #' Joint kernel for (Y,X) evaluated at (Q,x)
-#' @keywords internal
+
 fq <- function(Y, X, x, Q, h) {
   if (is.vector(X)) X <- matrix(X, ncol = 1)
   d <- ncol(X)
@@ -23,7 +23,7 @@ fq <- function(Y, X, x, Q, h) {
 }
 
 #' Conditional density f_{Y|X}(Q|x) via kernel ratio
-#' @export
+
 fqx <- function(Y, X, x, Q, h) {
   if (is.vector(X)) X <- matrix(X, ncol = 1)
   x <- as.vector(x)
@@ -36,7 +36,7 @@ fqx <- function(Y, X, x, Q, h) {
 }
 
 #' Conditional density via indicator approximation
-#' @export
+
 fqx2 <- function(Y, X, x, Q, h) {
   if (is.vector(X)) X <- matrix(X, ncol = 1)
   x <- as.vector(x)
@@ -48,7 +48,7 @@ fqx2 <- function(Y, X, x, Q, h) {
 }
 
 #' Vectorized variants
-#' @export
+
 fqx2_vec <- function(Y, X, x_mat, Q_vec, h) {
   mapply(function(i, Q) {
     fqx2(Y, X, x_mat[i, ], Q, h)
