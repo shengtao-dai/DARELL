@@ -1,7 +1,4 @@
-# Misc utilities
 
-#' Influence-like scalar used for scaling
-#' @export
 inf_cq_local <- function(f) {
   K <- length(f)
   tau <- (1:K) / (K + 1)
