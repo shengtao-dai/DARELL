@@ -2,10 +2,21 @@
 % Please edit documentation in R/density.R
 \name{fx_den}
 \alias{fx_den}
-\title{Kernel density estimate of f_X(x)}
+\title{Kernel density estimate of the covariate density}
 \usage{
 fx_den(X, x, h)
 }
+\arguments{
+\item{X}{Numeric matrix or data frame of covariates (n x d). A vector is
+treated as a single covariate.}
+
+\item{x}{Numeric vector of length d, the evaluation point.}
+
+\item{h}{Bandwidth (scalar).}
+}
+\value{
+Numeric scalar, the estimated density at \code{x}.
+}
 \description{
-Kernel density estimate of f_X(x)
+Product Gaussian kernel estimate of \eqn{f_X(x)}.
 }

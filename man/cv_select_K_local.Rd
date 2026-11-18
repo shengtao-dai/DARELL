@@ -2,24 +2,27 @@
 % Please edit documentation in R/cv.R
 \name{cv_select_K_local}
 \alias{cv_select_K_local}
-\title{Cross-validated selection of K}
+\title{Cross-validated selection of the number of quantiles K}
 \usage{
 cv_select_K_local(Y, X, K_grid, L, h)
 }
 \arguments{
-\item{Y}{numeric vector}
+\item{Y}{Numeric response vector of length n.}
 
-\item{X}{numeric matrix/data.frame}
+\item{X}{Numeric matrix or data frame of covariates (n x d).}
 
-\item{K_grid}{integer vector of candidate K values}
+\item{K_grid}{Integer vector of candidate K values.}
 
-\item{L}{number of folds}
+\item{L}{Integer, number of folds.}
 
-\item{h}{bandwidth}
+\item{h}{Bandwidth (scalar).}
 }
 \value{
-integer K_opt; attributes 'avg_MSE' and 'MSE_mat' are attached
+The selected K, with attributes \code{avg_MSE} (average MSE per
+candidate) and \code{MSE_mat} (L x length(K_grid) matrix of fold MSEs).
 }
 \description{
-Cross-validated selection of K
+For each candidate K, computes the out-of-fold mean squared error of the
+local linear DARE prediction and returns the K with the smallest average.
+Folds are drawn after \code{set.seed(1)}.
 }

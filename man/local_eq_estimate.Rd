@@ -2,28 +2,53 @@
 % Please edit documentation in R/main.R
 \name{local_eq_estimate}
 \alias{local_eq_estimate}
-\title{Local equivalent-weight estimator (precision-style CI)}
+\title{Distributionally adaptive regression estimator (local linear)}
 \usage{
 local_eq_estimate(Y, X, x0, c_band = 1, K_grid, L = 5)
 }
 \arguments{
-\item{Y}{numeric vector (response)}
+\item{Y}{Numeric response vector of length n.}
 
-\item{X}{numeric matrix/data.frame (n x d)}
+\item{X}{Numeric matrix or data frame of covariates (n x d).}
 
-\item{x0}{numeric vector of length d (target point)}
+\item{x0}{Numeric vector of length d, the target point.}
 
-\item{c_band}{numeric scalar, bandwidth constant}
+\item{c_band}{Numeric scalar, the bandwidth constant.}
 
-\item{K_grid}{integer vector of candidate K}
+\item{K_grid}{Integer vector of candidate numbers of quantiles K.}
 
-\item{L}{integer, number of folds for CV}
+\item{L}{Integer, number of cross-validation folds.}
 }
 \value{
-list with m_hat_local_eq, cov_hat_local_eq, m_hat_local_eq_lower, m_hat_local_eq_upper
+A list with
+\itemize{
+\item \code{m_hat_local_eq}: the estimate of \eqn{m(x_0)};
+\item \code{cov_hat_local_eq}: its estimated standard error;
+\item \code{m_hat_local_eq_lower}, \code{m_hat_local_eq_upper}: the 95\% confidence
+interval, \code{m_hat_local_eq} -/+ 1.96 * \code{cov_hat_local_eq}.
+}
 }
 \description{
-This version matches the user's current script: it returns
-cov_hat_local_eq = 1 / SE and uses CI as m_hat ± 1.96 * (1/SE).
-See also \code{local_eq_estimate_se()} for the conventional SE-based CI.
+Estimates the conditional mean \eqn{m(x_0) = E[Y \mid X = x_0]} by a
+weighted combination of local linear quantile estimates at the levels
+\eqn{\tau_k = k / (K + 1)}, \eqn{k = 1, \dots, K}. The weights are built
+from the estimated conditional densities at those quantiles, and K is chosen
+from \code{K_grid} by \code{L}-fold cross-validation with \code{\link[=cv_select_K_local]{cv_select_K_local()}}.
+}
+\details{
+The bandwidth is \eqn{h = c_{band} \, n^{-1/(d+1)}}. Cross-validation folds
+are drawn after \code{set.seed(1)}, so results are reproducible, but the global
+random number generator is reset.
+}
+\examples{
+set.seed(123)
+n <- 100
+X <- cbind(rnorm(n), rnorm(n))
+Y <- 0.5 + X \%*\% c(1, -1) + rt(n, df = 3)  # heavy-tailed errors
+res <- local_eq_estimate(Y, X, x0 = c(0, 0), K_grid = c(1, 3, 5), L = 2)
+res$m_hat_local_eq  # true value is 0.5
+}
+\references{
+Dai, S. (2025). Distributionally Adaptive Regression
+Estimators. Working paper. \url{https://ssrn.com/abstract=5683602}
 }

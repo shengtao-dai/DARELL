@@ -2,24 +2,25 @@
 % Please edit documentation in R/quantile.R
 \name{local_quantile}
 \alias{local_quantile}
-\title{Local quantile estimator at a point}
+\title{Local linear quantile estimator at a point}
 \usage{
 local_quantile(Y, X, x, tau, h)
 }
 \arguments{
-\item{Y}{numeric vector, response}
+\item{Y}{Numeric response vector of length n.}
 
-\item{X}{numeric matrix/data.frame, predictors (n x d)}
+\item{X}{Numeric matrix or data frame of covariates (n x d).}
 
-\item{x}{numeric vector of length d, target point}
+\item{x}{Numeric vector of length d, the target point.}
 
-\item{tau}{quantile level in (0,1)}
+\item{tau}{Quantile level in (0, 1).}
 
-\item{h}{bandwidth (scalar or length-d vector; here treated as scalar)}
+\item{h}{Bandwidth (scalar).}
 }
 \value{
-numeric scalar, estimated conditional tau-quantile at x
+Numeric scalar, the estimated conditional \code{tau}-quantile at \code{x}.
 }
 \description{
-Local quantile estimator at a point
+Minimizes the Gaussian-kernel-weighted check loss of a local linear fit
+around \code{x} with \code{\link[stats:optim]{stats::optim()}} and returns the intercept.
 }

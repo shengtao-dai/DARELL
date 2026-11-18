@@ -2,10 +2,20 @@
 % Please edit documentation in R/utils.R
 \name{inf_cq_local}
 \alias{inf_cq_local}
-\title{Influence-like scalar used for scaling}
+\title{Variance factor of an equally weighted quantile average}
 \usage{
 inf_cq_local(f)
 }
+\arguments{
+\item{f}{Numeric vector of length K, the (conditional) densities evaluated
+at the K quantiles.}
+}
+\value{
+Numeric scalar.
+}
 \description{
-Influence-like scalar used for scaling
+For quantile levels \eqn{\tau_j = j / (K + 1)}, \eqn{j = 1, \dots, K},
+computes \eqn{K^{-2} \sum_{j,k} (\min(\tau_j, \tau_k) - \tau_j \tau_k)
+/ (f_j f_k)}, the asymptotic variance factor of the equally weighted average
+of K quantile estimators.
 }

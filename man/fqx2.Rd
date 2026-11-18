@@ -2,10 +2,27 @@
 % Please edit documentation in R/density.R
 \name{fqx2}
 \alias{fqx2}
-\title{Conditional density via indicator approximation}
+\title{Conditional density of Y given X via an indicator approximation}
 \usage{
 fqx2(Y, X, x, Q, h)
 }
+\arguments{
+\item{Y}{Numeric response vector of length n.}
+
+\item{X}{Numeric matrix or data frame of covariates (n x d). A vector is
+treated as a single covariate.}
+
+\item{x}{Numeric vector of length d, the conditioning point.}
+
+\item{Q}{Numeric scalar, the value of Y at which the density is evaluated.}
+
+\item{h}{Bandwidth (scalar).}
+}
+\value{
+Numeric scalar, the estimated conditional density.
+}
 \description{
-Conditional density via indicator approximation
+Estimates \eqn{f_{Y|X}(Q \mid x)} by the kernel-weighted share of
+observations with \eqn{|Y - Q| < h}, divided by \eqn{2h}. This is the
+density estimate used inside \code{\link[=local_eq_estimate]{local_eq_estimate()}}.
 }

@@ -1,12 +1,18 @@
 # Cross validation to select K
 
-#' Cross-validated selection of K
-#' @param Y numeric vector
-#' @param X numeric matrix/data.frame
-#' @param K_grid integer vector of candidate K values
-#' @param L number of folds
-#' @param h bandwidth
-#' @return integer K_opt; attributes 'avg_MSE' and 'MSE_mat' are attached
+#' Cross-validated selection of the number of quantiles K
+#'
+#' For each candidate K, computes the out-of-fold mean squared error of the
+#' local linear DARE prediction and returns the K with the smallest average.
+#' Folds are drawn after `set.seed(1)`.
+#'
+#' @param Y Numeric response vector of length n.
+#' @param X Numeric matrix or data frame of covariates (n x d).
+#' @param K_grid Integer vector of candidate K values.
+#' @param L Integer, number of folds.
+#' @param h Bandwidth (scalar).
+#' @return The selected K, with attributes `avg_MSE` (average MSE per
+#'   candidate) and `MSE_mat` (L x length(K_grid) matrix of fold MSEs).
 #' @export
 cv_select_K_local <- function(Y, X, K_grid, L, h) {
   n <- length(Y)

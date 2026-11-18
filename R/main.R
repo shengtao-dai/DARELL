@@ -1,18 +1,37 @@
 # Main estimator
 
-#' Local equivalent-weight estimator (precision-style CI)
+#' Distributionally adaptive regression estimator (local linear)
 #'
-#' This version matches the user's current script: it returns
-#' cov_hat_local_eq = 1 / SE and uses CI as m_hat ± 1.96 * (1/SE).
-#' See also \code{local_eq_estimate_se()} for the conventional SE-based CI.
+#' Estimates the conditional mean \eqn{m(x_0) = E[Y \mid X = x_0]} by a
+#' weighted combination of local linear quantile estimates at the levels
+#' \eqn{\tau_k = k / (K + 1)}, \eqn{k = 1, \dots, K}. The weights are built
+#' from the estimated conditional densities at those quantiles, and K is chosen
+#' from `K_grid` by `L`-fold cross-validation with [cv_select_K_local()].
 #'
-#' @param Y numeric vector (response)
-#' @param X numeric matrix/data.frame (n x d)
-#' @param x0 numeric vector of length d (target point)
-#' @param c_band numeric scalar, bandwidth constant
-#' @param K_grid integer vector of candidate K
-#' @param L integer, number of folds for CV
-#' @return list with m_hat_local_eq, cov_hat_local_eq, m_hat_local_eq_lower, m_hat_local_eq_upper
+#' The bandwidth is \eqn{h = c_{band} \, n^{-1/(d+1)}}. Cross-validation folds
+#' are drawn after `set.seed(1)`, so results are reproducible, but the global
+#' random number generator is reset.
+#'
+#' @param Y Numeric response vector of length n.
+#' @param X Numeric matrix or data frame of covariates (n x d).
+#' @param x0 Numeric vector of length d, the target point.
+#' @param c_band Numeric scalar, the bandwidth constant.
+#' @param K_grid Integer vector of candidate numbers of quantiles K.
+#' @param L Integer, number of cross-validation folds.
+#' @return A list with
+#'   * `m_hat_local_eq`: the estimate of \eqn{m(x_0)};
+#'   * `cov_hat_local_eq`: its estimated standard error;
+#'   * `m_hat_local_eq_lower`, `m_hat_local_eq_upper`: the 95% confidence
+#'     interval, `m_hat_local_eq` -/+ 1.96 * `cov_hat_local_eq`.
+#' @references Dai, S. (2025). Distributionally Adaptive Regression
+#'   Estimators. Working paper. \url{https://ssrn.com/abstract=5683602}
+#' @examples
+#' set.seed(123)
+#' n <- 100
+#' X <- cbind(rnorm(n), rnorm(n))
+#' Y <- 0.5 + X %*% c(1, -1) + rt(n, df = 3)  # heavy-tailed errors
+#' res <- local_eq_estimate(Y, X, x0 = c(0, 0), K_grid = c(1, 3, 5), L = 2)
+#' res$m_hat_local_eq  # true value is 0.5
 #' @export
 local_eq_estimate <- function(Y, X, x0, c_band = 1, K_grid, L = 5) {
   if (is.vector(X)) X <- matrix(X, ncol = length(x0))

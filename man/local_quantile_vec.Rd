@@ -2,10 +2,24 @@
 % Please edit documentation in R/quantile.R
 \name{local_quantile_vec}
 \alias{local_quantile_vec}
-\title{Vectorized local quantile for multiple target points}
+\title{Local linear quantile estimates at several points}
 \usage{
 local_quantile_vec(Y, X, X0, tau, h)
 }
+\arguments{
+\item{Y}{Numeric response vector of length n.}
+
+\item{X}{Numeric matrix or data frame of covariates (n x d).}
+
+\item{X0}{Numeric matrix of target points, one per row.}
+
+\item{tau}{Quantile level in (0, 1).}
+
+\item{h}{Bandwidth (scalar).}
+}
+\value{
+Numeric vector of estimated conditional quantiles.
+}
 \description{
-Vectorized local quantile for multiple target points
+Applies \code{\link[=local_quantile]{local_quantile()}} to each row of \code{X0}.
 }

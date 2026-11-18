@@ -6,6 +6,12 @@
 \usage{
 kernel_ep(u)
 }
+\arguments{
+\item{u}{Numeric vector.}
+}
+\value{
+Numeric vector of kernel values.
+}
 \description{
 Epanechnikov kernel
 }

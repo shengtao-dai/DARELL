@@ -2,11 +2,17 @@
 % Please edit documentation in R/kernels.R
 \name{kernel_gau}
 \alias{kernel_gau}
-\title{Gaussian kernel (standard normal pdf)}
+\title{Gaussian kernel}
 \usage{
 kernel_gau(u)
 }
+\arguments{
+\item{u}{Numeric vector.}
+}
+\value{
+Numeric vector of kernel values.
+}
 \description{
-Gaussian kernel (standard normal pdf)
+Gaussian kernel
 }
 \keyword{internal}

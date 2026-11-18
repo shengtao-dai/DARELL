@@ -2,10 +2,26 @@
 % Please edit documentation in R/density.R
 \name{fqx2_vec}
 \alias{fqx2_vec}
-\title{Vectorized variants}
+\title{Vectorized conditional density estimates}
 \usage{
 fqx2_vec(Y, X, x_mat, Q_vec, h)
 }
+\arguments{
+\item{Y}{Numeric response vector of length n.}
+
+\item{X}{Numeric matrix or data frame of covariates (n x d). A vector is
+treated as a single covariate.}
+
+\item{x_mat}{Numeric matrix of conditioning points, one per row.}
+
+\item{Q_vec}{Numeric vector with one Y value per row of \code{x_mat}.}
+
+\item{h}{Bandwidth (scalar).}
+}
+\value{
+Numeric vector of estimated conditional densities.
+}
 \description{
-Vectorized variants
+Applies \code{\link[=fqx2]{fqx2()}} row by row, pairing the i-th row of \code{x_mat} with the i-th
+element of \code{Q_vec}.
 }

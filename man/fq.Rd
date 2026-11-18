@@ -2,11 +2,26 @@
 % Please edit documentation in R/density.R
 \name{fq}
 \alias{fq}
-\title{Joint kernel for (Y,X) evaluated at (Q,x)}
+\title{Joint kernel density of (Y, X) at (Q, x)}
 \usage{
 fq(Y, X, x, Q, h)
 }
+\arguments{
+\item{Y}{Numeric response vector of length n.}
+
+\item{X}{Numeric matrix or data frame of covariates (n x d). A vector is
+treated as a single covariate.}
+
+\item{x}{Numeric vector of length d, the conditioning point.}
+
+\item{Q}{Numeric scalar, the value of Y at which the density is evaluated.}
+
+\item{h}{Bandwidth (scalar).}
+}
+\value{
+Numeric scalar.
+}
 \description{
-Joint kernel for (Y,X) evaluated at (Q,x)
+Joint kernel density of (Y, X) at (Q, x)
 }
 \keyword{internal}

@@ -2,10 +2,30 @@
 % Please edit documentation in R/density.R
 \name{fqx}
 \alias{fqx}
-\title{Conditional density f_{Y|X}(Q|x) via kernel ratio}
+\title{Conditional density of Y given X via a kernel ratio}
 \usage{
 fqx(Y, X, x, Q, h)
 }
+\arguments{
+\item{Y}{Numeric response vector of length n.}
+
+\item{X}{Numeric matrix or data frame of covariates (n x d). A vector is
+treated as a single covariate.}
+
+\item{x}{Numeric vector of length d, the conditioning point.}
+
+\item{Q}{Numeric scalar, the value of Y at which the density is evaluated.}
+
+\item{h}{Bandwidth (scalar).}
+}
+\value{
+Numeric scalar, the estimated conditional density.
+}
 \description{
-Conditional density f_{Y|X}(Q|x) via kernel ratio
+Estimates \eqn{f_{Y|X}(Q \mid x)} as the ratio of a joint kernel density
+(Epanechnikov kernel in Y, product Gaussian kernel in X) to the covariate
+kernel density.
+}
+\seealso{
+\code{\link[=fqx2]{fqx2()}} for the indicator-based version used by the estimator.
 }

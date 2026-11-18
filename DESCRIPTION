@@ -1,20 +1,25 @@
 Package: DARELL
 Type: Package
 Title: Distributionally Adaptive Regression Estimator under Local Linear
-Version: 0.1.0
-Authors@R: c(person(given = "Shengtao", family = "Dai", role = c("aut", "cre"), email = "shengtao.dai@bc.edu"))
-Description: Implements a distributionally adaptive regression estimator that combines multiple local quantile estimates with quantile-based ensemble weights.
+Version: 0.1.1
+Authors@R: person("Shengtao", "Dai", email = "shengtao.dai@bc.edu", role = c("aut", "cre"))
+Description: Implements the local linear version of the distributionally
+    adaptive regression estimator (DARE) of Dai (2025)
+    <https://ssrn.com/abstract=5683602>. The conditional mean at a target
+    point is estimated by a weighted combination of local linear quantile
+    estimates, with weights built from estimated conditional densities and the
+    number of quantiles chosen by cross-validation. Under regularity
+    conditions the estimator attains the asymptotic variance of the infeasible
+    likelihood-based estimator while keeping the convergence rate of
+    conventional estimators, so it stays efficient when errors are heavy-tailed
+    or non-Gaussian. A confidence interval is returned with the estimate.
 License: MIT + file LICENSE
+URL: https://github.com/shengtao-dai/DARELL, https://shengtao-dai.github.io/DARELL/
+BugReports: https://github.com/shengtao-dai/DARELL/issues
+Depends: R (>= 3.6)
+Imports: matrixStats, stats
+Suggests: testthat (>= 3.0.0)
+Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
-Depends: R (>= 3.6)
-Imports: matrixStats, stats, utils
-Suggests: testthat (>= 3.0.0), roxygen2, devtools
-Config/testthat/edition: 3
-NeedsCompilation: no
-Packaged: 2025-08-31 19:38:07 UTC; daishengtao
-Maintainer: Shengtao Dai <shengtao.dai@bc.edu>
-URL: https://github.com/shengtao-dai/DARELL
-BugReports: https://github.com/shengtao-dai/DARELL/issues
-
+Config/roxygen2/version: 8.1.1
