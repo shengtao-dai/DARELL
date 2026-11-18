@@ -2,7 +2,7 @@ Package: DARELL
 Type: Package
 Title: Distributionally Adaptive Regression Estimator under Local Linear
 Version: 0.1.1
-Authors@R: person("Shengtao", "Dai", email = "shengtao.dai@bc.edu", role = c("aut", "cre"))
+Authors@R: person("Shengtao", "Dai", email = "shengtao.dai@outlook.com", role = c("aut", "cre"))
 Description: Implements the local linear version of the distributionally
     adaptive regression estimator (DARE) of Dai (2025)
     <https://ssrn.com/abstract=5683602>. The conditional mean at a target
